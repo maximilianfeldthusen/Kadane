@@ -79,3 +79,6 @@ int main() {
 
 ### Summary
 The code effectively implements Kadane's Algorithm to determine the maximum sum of a contiguous subarray in linear time (O(n)), making it efficient for large datasets. It handles edge cases, such as empty input, and outputs the result clearly.
+
+
+![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
