@@ -52,7 +52,7 @@ For each element:
 - Decide whether to start a new subarray at `nums[i]` or extend the previous subarray (`max_current + nums[i]`).  
 - Update `max_global` if the new `max_current` is larger.  
 
-👉 This is the essence of Kadane’s Algorithm: at each step, you choose the better option (start fresh or continue).
+This is the essence of Kadane’s Algorithm: at each step, you choose the better option (start fresh or continue).
 
 ### Return Result
 ```cpp
@@ -91,7 +91,7 @@ Step-by-step:
 - At -5: `max_current = max(-5, 6-5) = 1`, `max_global = 6`  
 - At 4: `max_current = max(4, 1+4) = 5`, `max_global = 6`  
 
-✅ **Final Answer:** `6` (from subarray `[4, -1, 2, 1]`)
+**Final Answer:** `6` (from subarray `[4, -1, 2, 1]`)
 
 ---
 
