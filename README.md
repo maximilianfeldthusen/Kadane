@@ -1,7 +1,5 @@
 
-Here’s your text converted into **GitHub-flavored Markdown** with proper headings, lists, and code blocks for clarity:
 
-```markdown
 # Kadane’s Algorithm Explained in C++
 
 Let’s break this program down step by step so you can see exactly what’s happening:
