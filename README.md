@@ -100,4 +100,4 @@ This program uses **Kadane’s Algorithm** to efficiently find the maximum sum o
 It works by dynamically deciding whether to extend the current subarray or start a new one at each step.
 ```
 
-If you’d like, I can extend this explanation into **code that also prints the actual subarray elements** (not just the sum), so you can see exactly which numbers form the maximum sum. Would you like me to add that?
+
