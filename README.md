@@ -98,6 +98,6 @@ Step-by-step:
 ## Summary
 This program uses **Kadane’s Algorithm** to efficiently find the maximum sum of a contiguous subarray in **linear time O(n)**.  
 It works by dynamically deciding whether to extend the current subarray or start a new one at each step.
-```
+
 
 
