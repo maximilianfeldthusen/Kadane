@@ -1,84 +1,75 @@
-## Documentation
 
-### Kadane
+# Kadane’s Algorithm Explained in C++
 
-This C++ code implements a solution to the "Maximum Subarray Problem" using Kadane's Algorithm, which efficiently finds the maximum sum of a contiguous subarray within a one-dimensional array of numbers. Here's a detailed breakdown of the code:
+Let’s break this program down step by step so you can see exactly what’s happening:
 
-### Header Files
+---
+
+## Header Files
 ```cpp
-#include <iostream>
-#include <vector>
-#include <algorithm> // for std::max
-#include <limits>    // for std::numeric_limits
-```
-- `#include <iostream>`: This is included to allow for input and output operations, such as `std::cout` and `std::cerr`.
-- `#include <vector>`: This is included to use the `std::vector` container for dynamic arrays.
-- `#include <algorithm>`: This is included to use the `std::max` function, which returns the greater of two values.
-- `#include <limits>`: Although it's included, it's not used in the code provided. It typically is used to define limits for types (like maximum and minimum values).
+#include <iostream>   // for input/output (std::cout, std::endl)
+#include <vector>     // for std::vector
+#include <algorithm>  // for std::max
 
-### Function Definition
-```cpp
+These libraries provide the tools you need: printing to console, using dynamic arrays (vector), and comparing values (std::max).
+
+Function: maxSubArray
 int maxSubArray(const std::vector<int>& nums) {
-```
-- This line defines a function `maxSubArray` that takes a constant reference to a vector of integers `nums` and returns an integer, which is the maximum subarray sum.
+    if (nums.empty()) {
+        throw std::invalid_argument("Input array is empty.");
+    }
 
-### Error Handling
-```cpp
-if (nums.empty()) {
-    std::cerr << "Error: The input array is empty." << std::endl;
-    return 0; // or throw an exception
-}
-```
-- Before processing, the function checks if the input array is empty. If it is, it outputs an error message to the standard error stream and returns 0. This is essential to avoid accessing elements in an empty vector.
+Purpose: Finds the maximum sum of a contiguous subarray using Kadane’s Algorithm.
+Empty check: If the input vector is empty, it throws an exception.
 
-### Variable Initialization
-```cpp
-int max_current = nums[0]; // Maximum sum of the subarray found so far
-int max_global = nums[0];  // Overall maximum sum
-```
-- `max_current` keeps track of the maximum sum of the subarray that ends at the current index while iterating through the array.
-- `max_global` maintains the overall maximum sum encountered so far.
+Initialization
+int max_current = nums[0];
+int max_global = nums[0];
 
-### Iteration through the Array
-```cpp
+max_current: The maximum sum of a subarray ending at the current index.
+max_global: The overall maximum sum found so far.
+Both start with the first element.
+
+Loop Through Array
 for (size_t i = 1; i < nums.size(); ++i) {
-```
-- A loop starts from the second element (index 1) of the array and goes to the end. The reason for starting at index 1 is that index 0 is already used for initialization.
-
-### Update Maximum Sums
-```cpp
-max_current = std::max(nums[i], max_current + nums[i]);
-```
-- This line updates `max_current` to be the maximum of the current element `nums[i]` and the sum of `max_current` plus `nums[i]`. This decision checks:
-  - If starting a new subarray at `nums[i]` is better than continuing the existing one.
-  
-```cpp
-if (max_current > max_global) {
-    max_global = max_current;
+    max_current = std::max(nums[i], max_current + nums[i]);
+    max_global = std::max(max_global, max_current);
 }
-```
-- If the `max_current` (the maximum subarray sum that ends at the current index) is greater than `max_global`, it updates `max_global` with the value of `max_current`.
 
-### Return Statement
-```cpp
+For each element:
+Decide whether to start a new subarray at nums[i] or extend the previous subarray (max_current + nums[i]).
+Update max_global if the new max_current is larger.
+This is the essence of Kadane’s Algorithm: at each step, you choose the better option (start fresh or continue).
+
+Return Result
 return max_global;
-```
-- After the loop finishes, the function returns `max_global`, which holds the maximum sum of any contiguous subarray found in the input array.
 
-### Main Function
-```cpp
+After scanning the entire array, max_global holds the maximum subarray sum.
+
+Main Function
 int main() {
-    std::vector<int> nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4}; // Example array
-    int result = maxSubArray(nums);
-    std::cout << "Maximum subarray sum is: " << result << std::endl;
+    std::vector<int> nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+    std::cout << "Maximum subarray sum is: " << maxSubArray(nums) << std::endl;
     return 0;
 }
-```
-- The `main` function initializes a vector `nums` with a sample array of integers, calls the `maxSubArray` function with this vector, and stores the result.
-- Finally, it prints the result to the console, indicating the maximum subarray sum.
 
-### Summary
-The code effectively implements Kadane's Algorithm to determine the maximum sum of a contiguous subarray in linear time (O(n)), making it efficient for large datasets. It handles edge cases, such as empty input, and outputs the result clearly.
+Defines an example array.
+Calls maxSubArray(nums) to compute the maximum sum.
+Prints the result.
 
+Example Walkthrough
+Array: {-2, 1, -3, 4, -1, 2, 1, -5, 4}
+Step-by-step:
+Start: max_current = -2, max_global = -2
+At 1: max_current = max(1, -2+1) = 1, max_global = 1
+At -3: max_current = max(-3, 1-3) = -2, max_global = 1
+At 4: max_current = max(4, -2+4) = 4, max_global = 4
+At -1: max_current = max(-1, 4-1) = 3, max_global = 4
+At 2: max_current = max(2, 3+2) = 5, max_global = 5
+At 1: max_current = max(1, 5+1) = 6, max_global = 6
+At -5: max_current = max(-5, 6-5) = 1, max_global = 6
+At 4: max_current = max(4, 1+4) = 5, max_global = 6
+ Final Answer: 6 (from subarray [4, -1, 2, 1])
 
-![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+Summary
+ This program uses Kadane’s Algorithm to efficiently find the maximum sum of a contiguous subarray in linear time O(n). It works by dynamically deciding whether to extend the current subarray or start a new one at each step.
